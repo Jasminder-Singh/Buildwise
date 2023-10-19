@@ -311,7 +311,7 @@ const ToolForm = () => {
         if (newQuantity > 0 && !moreQuantity) {
             setFlag(true);
             const updatedTools = tools.map((obj, index) => {
-                if (id === index && newQuantity >= 0) {
+                if (id === index && newQuantity >= 0 && obj.availQuantity - newQuantity > 0) {
                     return { ...obj, quantity: parseInt(newQuantity), availQuantity : obj.availQuantity - newQuantity };
                 }
                 return obj;
@@ -325,7 +325,7 @@ const ToolForm = () => {
         try {
             const data = await fetch("https://buildwise-three.vercel.app/api/gettools", {
                 method: "GET",
-                cache : "no-cache",
+                cache : "no-store",
                 headers : {
                     "Content-type" : "application/json"
                 }
