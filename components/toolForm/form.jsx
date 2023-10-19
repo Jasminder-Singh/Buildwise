@@ -506,7 +506,7 @@ const ToolForm = () => {
                                         className="border border-black p-1 md:p-2 w-full sm:w-[70%]"
                                         onChange={(e) => getQuantity(1, e.target.value)} />
                                     <p className="text-sm font-bold p-1">
-                                        {tools[1]?.availQuantity ? "Available only : " : getTools ? <span className="text-blue-500">Loading.....</span> : <span className="text-red-500">Not availbale</span>}
+                                        {tools[1]?.availQuantity ? "Available only : " : !getTools ? <span className="text-blue-500">Loading.....</span> : <span className="text-red-500">Not availbale</span>}
                                         <span className="text-green-600">
                                             {tools[1]?.availQuantity ? tools[1]?.availQuantity : null}
                                         </span>
@@ -525,7 +525,7 @@ const ToolForm = () => {
                                         className="border border-black p-1 md:p-2 w-full sm:w-[70%]"
                                         onChange={(e) => getQuantity(2, e.target.value)} />
                                     <p className="text-sm font-bold p-1">
-                                        {tools[2]?.availQuantity ? "Available only : " : getTools ? <span className="text-blue-500">Loading.....</span> : <span className="text-red-500">Not availbale</span>}
+                                        {tools[2]?.availQuantity ? "Available only : " : !getTools ? <span className="text-blue-500">Loading.....</span> : <span className="text-red-500">Not availbale</span>}
                                         <span className="text-green-600">
                                             {tools[2]?.availQuantity ? tools[2]?.availQuantity : null}
                                         </span>
@@ -541,7 +541,7 @@ const ToolForm = () => {
                                         className="border border-black p-1 md:p-2 w-full sm:w-[70%]"
                                         onChange={(e) => getQuantity(3, e.target.value)} />
                                     <p className="text-sm font-bold p-1">
-                                        {tools[3]?.availQuantity ? "Available only : " : getTools ? <span className="text-blue-500">Loading.....</span> : <span className="text-red-500">Not availbale</span>}
+                                        {tools[3]?.availQuantity ? "Available only : " : !getTools ? <span className="text-blue-500">Loading.....</span> : <span className="text-red-500">Not availbale</span>}
                                         <span className="text-green-600">
                                             {tools[3]?.availQuantity ? tools[3]?.availQuantity : null}
                                         </span>
@@ -560,7 +560,7 @@ const ToolForm = () => {
                                         className="border border-black p-1 md:p-2 w-full sm:w-[70%]"
                                         onChange={(e) => getQuantity(4, e.target.value)} />
                                     <p className="text-sm font-bold p-1">
-                                        {tools[4]?.availQuantity ? "Available only : " : getTools ? <span className="text-blue-500">Loading.....</span> : <span className="text-red-500">Not availbale</span>}
+                                        {tools[4]?.availQuantity ? "Available only : " : !getTools ? <span className="text-blue-500">Loading.....</span> : <span className="text-red-500">Not availbale</span>}
                                         <span className="text-green-600">
                                             {tools[4]?.availQuantity ? tools[4]?.availQuantity : null}
                                         </span>
@@ -576,7 +576,7 @@ const ToolForm = () => {
                                         className="border border-black p-1 md:p-2 w-full sm:w-[70%]"
                                         onChange={(e) => getQuantity(5, e.target.value)} />
                                     <p className="text-sm font-bold p-1">
-                                        {tools[5]?.availQuantity ? "Available only : " : getTools ? <span className="text-blue-500">Loading.....</span> : <span className="text-red-500">Not availbale</span>}
+                                        {tools[5]?.availQuantity ? "Available only : " : !getTools ? <span className="text-blue-500">Loading.....</span> : <span className="text-red-500">Not availbale</span>}
                                         <span className="text-green-600">
                                             {tools[5]?.availQuantity ? tools[5]?.availQuantity : null}
                                         </span>
@@ -596,7 +596,7 @@ const ToolForm = () => {
                                         className="border border-black p-1 md:p-2 w-full sm:w-[70%]"
                                         onChange={(e) => getQuantity(6, e.target.value)} />
                                     <p className="text-sm font-bold p-1">
-                                        {tools[6]?.availQuantity ? "Available only : " : getTools ? <span className="text-blue-500">Loading.....</span> : <span className="text-red-500">Not availbale</span>}
+                                        {tools[6]?.availQuantity ? "Available only : " : !getTools ? <span className="text-blue-500">Loading.....</span> : <span className="text-red-500">Not availbale</span>}
                                         <span className="text-green-600">
                                             {tools[6]?.availQuantity ? tools[6]?.availQuantity : null}
                                         </span>
@@ -612,7 +612,7 @@ const ToolForm = () => {
                                         className="border border-black p-1 md:p-2 w-full sm:w-[70%]"
                                         onChange={(e) => getQuantity(7, e.target.value)} />
                                     <p className="text-sm font-bold p-1">
-                                        {tools[7]?.availQuantity ? "Available only : " : getTools ? <span className="text-blue-500">Loading.....</span> : <span className="text-red-500">Not availbale</span>}
+                                        {tools[7]?.availQuantity ? "Available only : " : !getTools ? <span className="text-blue-500">Loading.....</span> : <span className="text-red-500">Not availbale</span>}
                                         <span className="text-green-600">
                                             {tools[7]?.availQuantity ? tools[7]?.availQuantity : null}
                                         </span>
@@ -631,7 +631,7 @@ const ToolForm = () => {
                                         className="border border-black p-1 md:p-2 w-full sm:w-[70%]"
                                         onChange={(e) => getQuantity(8, e.target.value)} />
                                     <p className="text-sm font-bold p-1">
-                                        {tools[8]?.availQuantity ? "Available only : " : getTools ? <span className="text-blue-500">Loading.....</span> : <span className="text-red-500">Not availbale</span>}
+                                        {tools[8]?.availQuantity ? "Available only : " : !getTools ? <span className="text-blue-500">Loading.....</span> : <span className="text-red-500">Not availbale</span>}
                                         <span className="text-green-600">
                                             {tools[8]?.availQuantity ? tools[8]?.availQuantity : null}
                                         </span>
@@ -647,7 +647,7 @@ const ToolForm = () => {
                                         className="border border-black p-1 md:p-2 w-full sm:w-[70%]"
                                         onChange={(e) => getQuantity(9, e.target.value)} />
                                     <p className="text-sm font-bold p-1">
-                                        {tools[9]?.availQuantity ? "Available only : " : getTools ? <span className="text-blue-500">Loading.....</span> : <span className="text-red-500">Not availbale</span>}
+                                        {tools[9]?.availQuantity ? "Available only : " : !getTools ? <span className="text-blue-500">Loading.....</span> : <span className="text-red-500">Not availbale</span>}
                                         <span className="text-green-600">
                                             {tools[9]?.availQuantity ? tools[9]?.availQuantity : null}
                                         </span>
@@ -666,7 +666,7 @@ const ToolForm = () => {
                                         className="border border-black p-1 md:p-2 w-full sm:w-[70%]"
                                         onChange={(e) => getQuantity(10, e.target.value)} />
                                     <p className="text-sm font-bold p-1">
-                                        {tools[10]?.availQuantity ? "Available only : " : getTools ? <span className="text-blue-500">Loading.....</span> : <span className="text-red-500">Not availbale</span>}
+                                        {tools[10]?.availQuantity ? "Available only : " : !getTools ? <span className="text-blue-500">Loading.....</span> : <span className="text-red-500">Not availbale</span>}
                                         <span className="text-green-600">
                                             {tools[10]?.availQuantity ? tools[10]?.availQuantity : null}
                                         </span>
@@ -682,7 +682,7 @@ const ToolForm = () => {
                                         className="border border-black p-1 md:p-2 w-full sm:w-[70%]"
                                         onChange={(e) => getQuantity(11, e.target.value)} />
                                     <p className="text-sm font-bold p-1">
-                                        {tools[11]?.availQuantity ? "Available only : " : getTools ? <span className="text-blue-500">Loading.....</span> : <span className="text-red-500">Not availbale</span>}
+                                        {tools[11]?.availQuantity ? "Available only : " : !getTools ? <span className="text-blue-500">Loading.....</span> : <span className="text-red-500">Not availbale</span>}
                                         <span className="text-green-600">
                                             {tools[11]?.availQuantity ? tools[11]?.availQuantity : null}
                                         </span>
@@ -701,7 +701,7 @@ const ToolForm = () => {
                                         className="border border-black p-1 md:p-2 w-full sm:w-[70%]"
                                         onChange={(e) => getQuantity(12, e.target.value)} />
                                     <p className="text-sm font-bold p-1">
-                                        {tools[12]?.availQuantity ? "Available only : " : getTools ? <span className="text-blue-500">Loading.....</span> : <span className="text-red-500">Not availbale</span>}
+                                        {tools[12]?.availQuantity ? "Available only : " : !getTools ? <span className="text-blue-500">Loading.....</span> : <span className="text-red-500">Not availbale</span>}
                                         <span className="text-green-600">
                                             {tools[12]?.availQuantity ? tools[12]?.availQuantity : null}
                                         </span>
@@ -732,7 +732,7 @@ const ToolForm = () => {
                                         className="border border-black p-1 md:p-2 w-full sm:w-[70%]"
                                         onChange={(e) => getQuantity(13, e.target.value)} />
                                     <p className="text-sm font-bold p-1">
-                                        {tools[13]?.availQuantity ? "Available only : " : getTools ? <span className="text-blue-500">Loading.....</span> : <span className="text-red-500">Not availbale</span>}
+                                        {tools[13]?.availQuantity ? "Available only : " : !getTools ? <span className="text-blue-500">Loading.....</span> : <span className="text-red-500">Not availbale</span>}
                                         <span className="text-green-600">
                                             {tools[13]?.availQuantity ? tools[13]?.availQuantity : null}
                                         </span>
@@ -748,7 +748,7 @@ const ToolForm = () => {
                                         className="border border-black p-1 md:p-2 w-full sm:w-[70%]"
                                         onChange={(e) => getQuantity(14, e.target.value)} />
                                     <p className="text-sm font-bold p-1">
-                                        {tools[14]?.availQuantity ? "Available only : " : getTools ? <span className="text-blue-500">Loading.....</span> : <span className="text-red-500">Not availbale</span>}
+                                        {tools[14]?.availQuantity ? "Available only : " : !getTools ? <span className="text-blue-500">Loading.....</span> : <span className="text-red-500">Not availbale</span>}
                                         <span className="text-green-600">
                                             {tools[14]?.availQuantity ? tools[14]?.availQuantity : null}
                                         </span>
@@ -766,7 +766,7 @@ const ToolForm = () => {
                                         className="border border-black p-1 md:p-2 w-full sm:w-[70%]"
                                         onChange={(e) => getQuantity(15, e.target.value)} />
                                     <p className="text-sm font-bold p-1">
-                                        {tools[15]?.availQuantity ? "Available only : " : getTools ? <span className="text-blue-500">Loading.....</span> : <span className="text-red-500">Not availbale</span>}
+                                        {tools[15]?.availQuantity ? "Available only : " : !getTools ? <span className="text-blue-500">Loading.....</span> : <span className="text-red-500">Not availbale</span>}
                                         <span className="text-green-600">
                                             {tools[15]?.availQuantity ? tools[15]?.availQuantity : null}
                                         </span>
