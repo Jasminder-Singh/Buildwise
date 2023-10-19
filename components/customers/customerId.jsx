@@ -181,7 +181,7 @@ const CustomerId = ({ id }) => {
         if (user) setTempRentDay(user.rentDays);
         setCurrDate(new Date((user?.date)).toLocaleString());
         if(changeStatus){
-            submitResponse(clickCancelorComplete);
+            submitResponse(changeStatus);
         }
     }, [user]);
 
