@@ -22,10 +22,10 @@ const CustomerId = ({ id }) => {
     const [model, setModel] = useState(false); // Show Model. 
     const [showDate, setShowDate] = useState(false); // Displays the date of the each tool if cancel or complelted.
     const [updateTools, setUpdateTools] = useState(false); // It is used inside useEffect when changing happen then it tells useEffect to call a funciton.
-    const [tempRentDay,setTempRentDay] = useState("");
-    const [time,setTime] = useState(0); // Used for setInterval;
-    const [changeRentTime,setChangeRentTime] = useState(false);
-    
+    const [tempRentDay, setTempRentDay] = useState("");
+    const [time, setTime] = useState(0); // Used for setInterval;
+    const [changeRentTime, setChangeRentTime] = useState(false);
+
     // Select checkbox then it will call. Used fo marking the which tool checked or not.
     const selectCheckbox = (name, action, e) => {
         if (action === "cancel") setFlag(false); // it hides the all checkboxes.
@@ -87,9 +87,18 @@ const CustomerId = ({ id }) => {
             const result = await response.json();
 
             setUser(result.user);
-            result.user
+
         } catch (err) {
-            console.log(err);
+            toast.error('Server error.', {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+            });
         }
     }
 
@@ -111,15 +120,15 @@ const CustomerId = ({ id }) => {
 
                 //  Update status of all the tools after cancel of completed the user status.
                 const value = userStatus === "cancel" ? 'cancel' : "return";
-                const temp = user.rentedTools.map((tool)=>{
-                    if(!tool.date){
+                const temp = user.rentedTools.map((tool) => {
+                    if (!tool.date) {
                         const newDate = new Date();
-                        return {...tool,status : value, date : newDate.toLocaleDateString()};
+                        return { ...tool, status: value, date: newDate.toLocaleDateString() };
                     }
-                    return {...tool,status : value};
+                    return { ...tool, status: value };
                 });
-                
-                setUser({...user,rentedTools : temp, status : userStatus});
+
+                setUser({ ...user, rentedTools: temp, status: userStatus });
                 // router.refresh();
                 toast.success('success', {
                     position: "top-right",
@@ -144,7 +153,7 @@ const CustomerId = ({ id }) => {
                     theme: "colored",
                 });
             }
-            console.log(response);
+
         } catch (err) {
             console.log(err);
             toast.error('Server error.', {
@@ -168,7 +177,7 @@ const CustomerId = ({ id }) => {
                 headers: {
                     "Content-type": "application/json",
                 },
-                body: JSON.stringify({ tools: user.rentedTools, newAmount: user.amount, increaseDay : increaseRentDay, rentDays : user.rentDays })
+                body: JSON.stringify({ tools: user.rentedTools, newAmount: user.amount, increaseDay: increaseRentDay, rentDays: user.rentDays })
             })
             setUpdateTools(false);
             setChangeRentTime(false);
@@ -180,7 +189,7 @@ const CustomerId = ({ id }) => {
 
     useEffect(() => {
         !user ? fetchCustomerById() : null;
-        if(user) setTempRentDay(user.rentDays);
+        if (user) setTempRentDay(user.rentDays);
         setCurrDate(new Date((user?.date)).toLocaleString());
 
     }, [user]);
@@ -189,7 +198,7 @@ const CustomerId = ({ id }) => {
         if (updateTools && !changeRentTime) {
             CancelOrReturn("");
         }
-        if(changeRentTime){
+        if (changeRentTime) {
             CancelOrReturn(true);
 
         }
@@ -197,29 +206,29 @@ const CustomerId = ({ id }) => {
 
     useEffect(() => {
         let id = setInterval(() => {
-            
+
             const date = new Date();
             const hour = date.getHours();
-            setTime(time+1);
-            if(user && user.rentDays !== tempRentDay + 1 && user?.status === "active" && hour-9 == 0){
+            setTime(time + 1);
+            if (user && user.rentDays !== tempRentDay + 1 && user?.status === "active" && hour - 9 == 0) {
                 let newAmount = 0;
-                user.rentedTools.forEach((tool)=>{
-                    if(tool.status === 'active'){
-                        newAmount += tool.rent * tool.quantity * tempRentDay+1;
+                user.rentedTools.forEach((tool) => {
+                    if (tool.status === 'active') {
+                        newAmount += tool.rent * tool.quantity * tempRentDay + 1;
                     }
                 });
-                setTempRentDay(tempRentDay+1)
-                setUser({...user, rentDays : tempRentDay+1, amount : newAmount});
+                setTempRentDay(tempRentDay + 1)
+                setUser({ ...user, rentDays: tempRentDay + 1, amount: newAmount });
                 setUpdateTools(true);
                 setChangeRentTime(true);
             }
-        }, 1000 * 60 * 30 ); // Call every 30 mins.
+        }, 1000 * 60 * 30); // Call every 30 mins.
         return () => clearInterval(id);
     }, [time]);
-    
 
-// console.log(user);
-// console.log(user?.rentDays," : ",tempRentDay+1);
+
+    // console.log(user);
+    // console.log(user?.rentDays," : ",tempRentDay+1);
     return (
         <>
             <div className=" flex justify-center items-center h-full">{/* Main container */}
