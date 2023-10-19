@@ -311,8 +311,8 @@ const ToolForm = () => {
         if (newQuantity > 0 && !moreQuantity) {
             setFlag(true);
             const updatedTools = tools.map((obj, index) => {
-                if (id === index && newQuantity >= 0 && obj.availQuantity - newQuantity > 0) {
-                    return { ...obj, quantity: parseInt(newQuantity), availQuantity : obj.availQuantity - newQuantity };
+                if (id === index && newQuantity >= 0) {
+                    return { ...obj, quantity: parseInt(newQuantity) };
                 }
                 return obj;
             })
