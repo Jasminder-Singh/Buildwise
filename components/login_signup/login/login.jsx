@@ -53,6 +53,7 @@ const Login = () => {
 				}
 
 			} catch (err) {
+				setSpiner(false);
 				toast.error('Failed ! try later.', {
 					position: "top-right",
 					autoClose: 3000,
