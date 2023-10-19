@@ -29,7 +29,7 @@ const Signup = () => {
 		onSubmit: async (values, { resetForm }) => {
 			try {
 				setSpiner(true);
-				const response = await fetch("http://localhost:3000/api/signup", {
+				const response = await fetch("https://buildwise-three.vercel.app/api/signup", {
 					method: "POST",
 					cache: "no-store",
 					headers: {

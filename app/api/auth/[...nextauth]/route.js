@@ -2,8 +2,6 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
-import userModel from "@/db/schema/user";
-import dbConnect, { disconnectDB } from "@/db/dbcon";
 
 export const authOptions = {
     providers: [
@@ -14,7 +12,7 @@ export const authOptions = {
                 try {
 
                     const { email, password } = credentials;
-                    const response = await fetch("http://localhost:3000/api/login", {
+                    const response = await fetch("https://buildwise-three.vercel.app/api/login", {
                         method: "POST",
                         headers: {
                             "Content-type": "application/json"
@@ -56,7 +54,7 @@ export const authOptions = {
                 const { name, picture, email, email_verified } = profile;
                 if (account.provider === "google" || account.provider === "facebook") {
 
-                    const response = await fetch('http://localhost:3000/api/signup',{
+                    const response = await fetch('https://buildwise-three.vercel.app/api/signup',{
                         method : "POST",
                         headers : {
                             "Content-type" : "application/json"

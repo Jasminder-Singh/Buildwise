@@ -83,7 +83,7 @@ const Add = () => {
 
         e.preventDefault();
         try {
-            const response = await fetch("http://localhost:3000/api/addtool", {
+            const response = await fetch("https://buildwise-three.vercel.app/api/addtool", {
                 method: "POST",
                 headers: {
                     "Content-type": "application/json"

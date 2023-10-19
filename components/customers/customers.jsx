@@ -22,7 +22,7 @@ const Coustmers = () => {
     const fetchCustomers = async () => {
         try {
             setLoading(true);
-            const customers = await fetch('http://localhost:3000/api/getcustomers', {
+            const customers = await fetch('https://buildwise-three.vercel.app/api/getcustomers', {
                 method: "GET",
                 headers: {
                     "Content-type": "application/json"

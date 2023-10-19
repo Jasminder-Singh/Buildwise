@@ -97,7 +97,7 @@ const CustomerId = ({ id }) => {
     const submitResponse = async (userStatus) => {
         try {
             setLoading(true);
-            const response = await fetch(`http://localhost:3000/api/getcustomers`, {
+            const response = await fetch(`https://buildwise-three.vercel.app/api/getcustomers`, {
                 method: "PUT",
                 headers: {
                     "Content-type": "application/json"
@@ -163,7 +163,7 @@ const CustomerId = ({ id }) => {
     // Function for updating each toole status and quantity.
     const CancelOrReturn = async (increaseRentDay) => {
         try {
-            const response = await fetch(`http://localhost:3000/api/getcustomers/${user._id}`, {
+            const response = await fetch(`https://buildwise-three.vercel.app/api/getcustomers/${user._id}`, {
                 method: "PUT",
                 headers: {
                     "Content-type": "application/json",

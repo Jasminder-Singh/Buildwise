@@ -196,7 +196,7 @@ const ToolForm = () => {
         onSubmit: async (values, { resetForm }) => {
             try {
                 setLoading(true);
-                const response = await fetch('http://localhost:3000/api/rent', {
+                const response = await fetch('https://buildwise-three.vercel.app/api/rent', {
                     method: "POST",
                     headers: {
                         "Content-type": "application/json"
@@ -323,7 +323,7 @@ const ToolForm = () => {
     // Fetching the tools from database;
     async function fetchTools() {
         try {
-            const data = await fetch("http://localhost:3000/api/gettools", {
+            const data = await fetch("https://buildwise-three.vercel.app/api/gettools", {
                 method: "GET"
             });
             const result = await data.json();
