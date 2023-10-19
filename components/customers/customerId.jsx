@@ -121,7 +121,7 @@ const CustomerId = ({ id }) => {
                 //  Update status of all the tools after cancel of completed the user status.
                 const value = userStatus === "cancel" ? 'cancel' : "return";
                 const temp = user.rentedTools.map((tool) => {
-                    if (!tool.date) {
+                    if (!tool.date || tool.status === "active") {
                         const newDate = new Date();
                         return { ...tool, status: value, date: newDate.toLocaleDateString() };
                     }
