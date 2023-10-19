@@ -16,7 +16,7 @@ export async function GET(req, { params }) {
     }
 }
 
-export async function PUT(req, { params }) {
+export async function PUT(req, { params }) { // This is for increase rent and days and change the tool status.
     try {
         const { tools, newAmount, increaseDay, days } = await req.json();
         const { id } = params;

@@ -28,12 +28,24 @@ export async function PUT(req) { // This is used when customer pay the amount or
             }
         });
 
-
         Promise.all(updatedTools)
             .then((result) => { })
             .catch((err) => console.log(err));
+        
+        // mark status cancel or return to each tool.
+        const markStatus = user.rentedTools.map((tool)=>{
+            if(userStatus === "cancel"){
+                const newDate = new Date();
+                return {...tool, status : "cancel", date : newDate.toLocaleDateString()};
+            }
+            if(userStatus === "completed"){
+                const newDate = new Date();
+                return {...tool, status : "return", date : newDate.toLocaleDateString()};
+            }
+            return tool;
+        })
 
-        const updateStatus = await customerModel.findByIdAndUpdate({ _id: user._id }, { $set: { status: userStatus } }, { new: true });
+        const updateStatus = await customerModel.findByIdAndUpdate({ _id: user._id }, { $set: { status: userStatus, rentedTools : markStatus } }, { new: true });
 
         if (updateStatus) return NextResponse.json({ message: "success" }, { status: 200 });
         else return NextResponse.json({ message: "Network error" }, { status: 511 });

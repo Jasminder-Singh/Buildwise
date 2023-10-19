@@ -728,7 +728,7 @@ const ToolForm = () => {
                                         className="border border-black p-1 md:p-2 w-full sm:w-[70%]"
                                         onChange={(e) => getQuantity(13, e.target.value)} />
                                     <p className="text-sm font-bold p-1">
-                                        {tools[13]?.availQuantity ? "Available only : " : tools[13]?.availQuantity === 0 ? <span className="text-blue-500">Loading.....</span> : <span className="text-red-500">Not availbale</span>}
+                                        {tools[13]?.availQuantity ? "Available only : " : tools[13]?.availQuantity === undefined ? <span className="text-blue-500">Loading.....</span> : <span className="text-red-500">Not availbale</span>}
                                         <span className="text-green-600">
                                             {tools[13]?.availQuantity ? tools[13]?.availQuantity : null}
                                         </span>
