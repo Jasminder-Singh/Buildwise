@@ -122,7 +122,7 @@ const CustomerId = ({ id }) => {
 
             if (response.status === 200) {
                 //  Update status of all the tools after cancel of completed the user status.
-                const value = changeStatus === "cancel" ? 'cancel' : "return";
+                const value = userStatus === "cancel" ? 'cancel' : "return";
                 const temp = user.rentedTools.map((tool) => {
                     if (!tool.date || tool.status === "active") {
                         const newDate = new Date();
@@ -131,7 +131,7 @@ const CustomerId = ({ id }) => {
                     return { ...tool, status: value };
                 });
 
-                setUser({ ...user, rentedTools: temp, status: changeStatus });
+                setUser({ ...user, rentedTools: temp, status: userStatus });
                 toast.success('success', {
                     position: "top-right",
                     autoClose: 2000,
