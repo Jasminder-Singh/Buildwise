@@ -7,7 +7,7 @@ export async function POST(req) {
     try {
         const { values: { name, city, phone, email, identityCard }, tools, image, identity } = await req.json();
         let totalAmount = 0;
-        console.log(identity);
+        
         const filteredTools = tools.filter((obj) => { // Filtering tools which have quantity greater then 0.
             if (obj.quantity > 0) {
                 totalAmount += obj.quantity * obj.rent;
