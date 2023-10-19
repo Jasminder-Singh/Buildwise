@@ -331,6 +331,7 @@ const ToolForm = () => {
                 }
             });
             const result = await data.json();
+            console.log(result);
             setGetTools(result.tools);
 
 
@@ -359,7 +360,7 @@ const ToolForm = () => {
             setTools(updatedTools);
         }
     }, [getTools])
-
+console.log("called");
     return (
 
         <div className="border">{/* Main container START*/}
