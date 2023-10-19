@@ -1,4 +1,4 @@
-import poster from '@/public/banner.png';
+import poster from '@/public/Banner.png';
 import Image from 'next/image';
 const Banner = ()=>{
 	return(
