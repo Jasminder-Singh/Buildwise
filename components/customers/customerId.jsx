@@ -77,7 +77,7 @@ const CustomerId = ({ id }) => {
     const fetchCustomerById = async () => {
         try {
             setLoading(true);
-            const response = await fetch(`http://localhost:3000/api/getcustomers/${id}`, {
+            const response = await fetch(`http://buildwise-three.vercep.app/api/getcustomers/${id}`, {
                 method: "GET",
                 headers: {
                     "Content-type": "application/json"
