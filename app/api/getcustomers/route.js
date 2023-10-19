@@ -22,7 +22,6 @@ export async function PUT(req) { // This is used when customer pay the amount or
         // user = {key : values};
         //userStatus = "cancel" , "completed";
         await dbConnect();
-        console.log(userStatus);
         const updatedTools = user.rentedTools.map((obj) => {
             if (obj.status === "active") {
                 return toolModel.updateOne({ punjabiName: obj.punjabi }, { $inc: { quantity: obj.quantity } });

@@ -25,6 +25,7 @@ const CustomerId = ({ id }) => {
     const [tempRentDay, setTempRentDay] = useState("");
     const [time, setTime] = useState(0); // Used for setInterval;
     const [changeRentTime, setChangeRentTime] = useState(false);
+    const [changeStatus, setChangeStatus] = useState("");
 
     // Select checkbox then it will call. Used fo marking the which tool checked or not.
     const selectCheckbox = (name, action, e) => {
@@ -102,7 +103,7 @@ const CustomerId = ({ id }) => {
         }
     }
 
-    // It will call when any changes happnes in user array. Such as canceling and completing etc.
+    // It will call when any changes happnes in user array. Such as "canceling" and "completing" etc.
     const submitResponse = async (userStatus) => {
         try {
             setLoading(true);
@@ -118,18 +119,6 @@ const CustomerId = ({ id }) => {
 
             if (response.status === 200) {
 
-                //  Update status of all the tools after cancel of completed the user status.
-                const value = userStatus === "cancel" ? 'cancel' : "return";
-                const temp = user.rentedTools.map((tool) => {
-                    if (!tool.date || tool.status === "active") {
-                        const newDate = new Date();
-                        return { ...tool, status: value, date: newDate.toLocaleDateString() };
-                    }
-                    return { ...tool, status: value };
-                });
-
-                setUser({ ...user, rentedTools: temp, status: userStatus });
-                // router.refresh();
                 toast.success('success', {
                     position: "top-right",
                     autoClose: 2000,
@@ -191,18 +180,32 @@ const CustomerId = ({ id }) => {
         !user ? fetchCustomerById() : null;
         if (user) setTempRentDay(user.rentDays);
         setCurrDate(new Date((user?.date)).toLocaleString());
-
+        if(changeStatus){
+            submitResponse(clickCancelorComplete);
+        }
     }, [user]);
 
     useEffect(() => {
         if (updateTools && !changeRentTime) {
             CancelOrReturn("");
         }
-        if (changeRentTime) {
+        if (!updateTools && changeRentTime) {
             CancelOrReturn(true);
-
         }
-    }, [updateTools]);
+        if (changeStatus) {
+            //  Update status of all the tools after cancel of completed the user status.
+            const value = changeStatus === "cancel" ? 'cancel' : "return";
+            const temp = user.rentedTools.map((tool) => {
+                if (!tool.date || tool.status === "active") {
+                    const newDate = new Date();
+                    return { ...tool, status: value, date: newDate.toLocaleDateString() };
+                }
+                return { ...tool, status: value };
+            });
+
+            setUser({ ...user, rentedTools: temp, status: changeStatus });
+        }
+    }, [updateTools, changeStatus]);
 
     useEffect(() => {
         let id = setInterval(() => {
@@ -227,8 +230,6 @@ const CustomerId = ({ id }) => {
     }, [time]);
 
 
-    // console.log(user);
-    // console.log(user?.rentDays," : ",tempRentDay+1);
     return (
         <>
             <div className=" flex justify-center items-center h-full">{/* Main container */}
@@ -359,7 +360,7 @@ const CustomerId = ({ id }) => {
                                     <button className={`bg-yellow-500 text-white px-5 py-2 
                                     ${flag ? 'cursor-not-allowed' : null} ${user?.status === "completed" ? 'invisible' : null}`}
                                         disabled={user?.status === "completed" || user?.status === "cancel" || flag}
-                                        onClick={() => submitResponse("cancel")}>
+                                        onClick={() => setChangeStatus("cancel")}>
                                         {user?.status == "cancel" ? "Canceled" : "Cancel"}
                                     </button>
 
@@ -368,7 +369,7 @@ const CustomerId = ({ id }) => {
                                     ${user?.status === "completed" ? "bg-none border-2 rounded-lg text-green-500 " : "bg-green-500"}
                                     ${flag ? 'cursor-not-allowed' : null}`}
                                         disabled={user?.status == "cancel" || user?.status === "completed" || flag}
-                                        onClick={() => submitResponse("completed")}>
+                                        onClick={() => setChangeStatus("completed")}>
                                         {user?.status == "completed" ? "Completed" : "Complete"}
                                     </button>
                                 </div>
