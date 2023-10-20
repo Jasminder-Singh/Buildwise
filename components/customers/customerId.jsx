@@ -22,9 +22,7 @@ const CustomerId = ({ id }) => {
     const [model, setModel] = useState(false); // Show Model. 
     const [showDate, setShowDate] = useState(false); // Displays the date of the each tool if cancel or complelted.
     const [updateTools, setUpdateTools] = useState(false); // It is used inside useEffect when changing happen then it tells useEffect to call a funciton.
-    const [tempRentDay, setTempRentDay] = useState("");
-    const [time, setTime] = useState(0); // Used for setInterval;
-    const [changeRentTime, setChangeRentTime] = useState(false);
+
 
     // Select checkbox then it will call. Used fo marking the which tool checked or not.
     const selectCheckbox = (name, action, e) => {
@@ -171,19 +169,17 @@ const CustomerId = ({ id }) => {
         }
     }
 
-    // Function for updating each toole status and quantity.
-    const CancelOrReturn = async (increaseRentDay) => {
+    // Function for updating each tools status and quantity.
+    const CancelOrReturn = async () => {
         try {
             const response = await fetch(`https://buildwise-three.vercel.app/api/getcustomers/${user._id}`, {
                 method: "PUT",
                 headers: {
                     "Content-type": "application/json",
                 },
-                body: JSON.stringify({ tools: user.rentedTools, newAmount: user.amount, increaseDay: increaseRentDay, rentDays: user.rentDays })
+                body: JSON.stringify({ tools: user.rentedTools, newAmount: user.amount })
             })
             setUpdateTools(false);
-            setChangeRentTime(false);
-            console.log(response);
         } catch (err) {
             console.log(err);
         }
@@ -191,41 +187,15 @@ const CustomerId = ({ id }) => {
 
     useEffect(() => {
         !user ? fetchCustomerById() : null;
-        if (user) setTempRentDay(user.rentDays);
         setCurrDate(new Date((user?.date)).toLocaleString());
     }, [user]);
 
     useEffect(() => {
-        if (updateTools && !changeRentTime) {
-            CancelOrReturn("");
+        if (updateTools) {
+            CancelOrReturn();
         }
-        if (!updateTools && changeRentTime) {
-            CancelOrReturn(true);
-        }
+        
     }, [updateTools]);
-
-    useEffect(() => {
-        let id = setInterval(() => {
-
-            const date = new Date();
-            const hour = date.getHours();
-            setTime(time + 1);
-            if (user && user.rentDays !== tempRentDay + 1 && user?.status === "active" && hour - 9 == 0) {
-                let newAmount = 0;
-                user.rentedTools.forEach((tool) => {
-                    if (tool.status === 'active') {
-                        newAmount += tool.rent * tool.quantity * tempRentDay + 1;
-                    }
-                });
-                setTempRentDay(tempRentDay + 1)
-                setUser({ ...user, rentDays: tempRentDay + 1, amount: newAmount });
-                setUpdateTools(true);
-                setChangeRentTime(true);
-            }
-        }, 1000 * 60 * 30); // Call every 30 mins.
-        return () => clearInterval(id);
-    }, [time]);
-
 
     return (
         <>
@@ -237,7 +207,7 @@ const CustomerId = ({ id }) => {
                         <div className="border-2 border-blue-500 h-full w-full md:w-[70%] py-5 px-3">
                             <Link href={"/customers"} className=" underline text-blue-500 my-1 inline-block" >{"< Go back"}</Link>
                             <div className="border border-black flex flex-row-reverse sm:flex-row justify-between items-center px-2 py-5">
-                                <div className="flex flex-col justify-between px-4 py-2 w-[40%] sm:w-[30%] h-full mb-3">
+                                <div className="flex flex-col justify-between px-4 py-2 w-[50%] sm:w-[30%] h-full mb-3">
                                     <Image src={user?.image || face} alt='face' width={100} height={100} className="border border-black rounded-lg mb-2 self-center" />
                                     <p className={`flex justify-center items-center capitalize 
                                     ${user?.status == "cancel" ? "bg-red-200" : user?.status === "active" ? "bg-green-200" : "bg-blue-200"} rounded-md`}> {user?.status}
@@ -280,71 +250,72 @@ const CustomerId = ({ id }) => {
                                                 onClick={() => setFlag(true)}>Edit</button>
                                     }
                                 </div>
-
-                                <table className="w-full text-center border-2">
-                                    <thead>
-                                        <tr className={`border-2 border-black text-blue-600`}>
+                                <div className="border-2 w-full overflow-x-auto">
+                                    <table className="w-full text-center border-2">
+                                        <thead>
+                                            <tr className={`border-2 border-black text-blue-600`}>
+                                                {
+                                                    flag
+                                                        ? <th className="p-1 md:p-2">Select</th>
+                                                        : null
+                                                }
+                                                <th className="p-1 md:p-2">S.No.</th>
+                                                <th className="p-1 md:p-2">Status</th>
+                                                <th className="p-1 md:p-2">Name</th>
+                                                <th className="p-1 md:p-2">Quant.</th>
+                                                <th className="p-1 md:p-2">₹/tool</th>
+                                                <th className="p-1 md:p-2">Days</th>
+                                                <th className="p-1 md:p-2">Rate</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
                                             {
-                                                flag
-                                                    ? <th className="p-1 md:p-2">Select</th>
-                                                    : null
-                                            }
-                                            <th className="p-1 md:p-2">S.No.</th>
-                                            <th className="p-1 md:p-2">Status</th>
-                                            <th className="p-1 md:p-2">Name</th>
-                                            <th className="p-1 md:p-2">Quant.</th>
-                                            <th className="p-1 md:p-2">₹/tool</th>
-                                            <th className="p-1 md:p-2">Days</th>
-                                            <th className="p-1 md:p-2">Rate</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {
-                                            user?.rentedTools?.map((tool, index) => {
+                                                user?.rentedTools?.map((tool, index) => {
 
-                                                return <tr key={tool.name}
-                                                    className={`border-b-2 ${user?.status === "cancel" || tool.status === "cancel" ? null : null}`}>
-                                                    {
-                                                        flag && tool.status === "active"
-                                                            ? <td className="p-3 sm:text-lg font-sans">
-                                                                <input type="checkbox" onChange={(e) => selectCheckbox(tool.punjabi, "", e)}
-                                                                    checked={tool?.checked ? true : false} className="cursor-pointer" />
-                                                            </td>
-                                                            : flag && tool.status === "cancel"
-                                                                ? <td className="flex justify-center items-center p-4">
-                                                                    <ImCancelCircle className="text-red-500 text-lg" />
+                                                    return <tr key={tool.name}
+                                                        className={`border-b-2 ${user?.status === "cancel" || tool.status === "cancel" ? null : null}`}>
+                                                        {
+                                                            flag && tool.status === "active"
+                                                                ? <td className="p-3 sm:text-lg font-sans">
+                                                                    <input type="checkbox" onChange={(e) => selectCheckbox(tool.punjabi, "", e)}
+                                                                        checked={tool?.checked ? true : false} className="cursor-pointer" />
                                                                 </td>
-                                                                : flag && tool.status === "return"
+                                                                : flag && tool.status === "cancel"
                                                                     ? <td className="flex justify-center items-center p-4">
-                                                                        <MdOutlineDownloadDone className="text-green-500 text-xl" />
-                                                                    </td> : null
-                                                    }
+                                                                        <ImCancelCircle className="text-red-500 text-lg" />
+                                                                    </td>
+                                                                    : flag && tool.status === "return"
+                                                                        ? <td className="flex justify-center items-center p-4">
+                                                                            <MdOutlineDownloadDone className="text-green-500 text-xl" />
+                                                                        </td> : null
+                                                        }
 
-                                                    <td className="p-3 sm:text-lg font-sans">{index + 1}</td>
-                                                    <td className={`sm:text-lg font-sans capitalize
+                                                        <td className="p-3 sm:text-lg font-sans">{index + 1}</td>
+                                                        <td className={`sm:text-lg font-sans capitalize
                                                  ${tool.status == "active" ? 'text-green-500 bg-green-100' : tool.status === "cancel" ? 'text-red-500' : null}`}
-                                                        onMouseEnter={() => setShowDate(true)} onMouseLeave={() => setShowDate(false)}>
-                                                        {showDate ? tool?.date : tool.status}
-                                                    </td>
-                                                    <td className="p-3 sm:text-lg font-sans">{tool.punjabi}</td>
-                                                    <td className="p-3 sm:text-lg font-sans">{tool.quantity}</td>
-                                                    <td className="p-3 sm:text-lg font-sans">{tool.rent} ₹</td>
-                                                    <td className="p-3 sm:text-lg font-sans">{tool.status === "cancel" || tool.status === "return" ? "--" : user?.rentDays}</td>
-                                                    <td className="p-3 sm:text-lg font-sans">{tool.rent * tool.quantity * user?.rentDays} ₹</td>
-                                                </tr>
+                                                            onMouseEnter={() => setShowDate(true)} onMouseLeave={() => setShowDate(false)}>
+                                                            {showDate ? tool?.date : tool.status}
+                                                        </td>
+                                                        <td className="p-3 sm:text-lg font-sans">{tool.punjabi}</td>
+                                                        <td className="p-3 sm:text-lg font-sans">{tool.quantity}</td>
+                                                        <td className="p-3 sm:text-lg font-sans">{tool.rent}₹</td>
+                                                        <td className="p-3 sm:text-lg font-sans">{tool.status === "cancel" || tool.status === "return" ? "--" : user?.rentDays}</td>
+                                                        <td className="p-3 sm:text-lg font-sans">{tool.rent * tool.quantity * user?.rentDays}₹</td>
+                                                    </tr>
 
-                                            })
+                                                })
 
-                                        }
-                                        <tr>
-                                            <td colSpan={flag ? 7 : 6} className={`font-bold text-right p-3 border-2
+                                            }
+                                            <tr>
+                                                <td colSpan={flag ? 7 : 6} className={`font-bold text-center p-3 border-2 text-md md:text-lg
                                          ${user?.status === "cancel" ? ' line-through' : null}`} >Total amount </td>
-                                            <td className={`font-bold  ${user?.status === "cancel" ? ' line-through' : null}`} >
-                                                {user?.amount} ₹
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                                <td className={`font-bold  ${user?.status === "cancel" ? ' line-through' : null}`} >
+                                                    {user?.amount} ₹
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                                 <div>
                                     <p className="p-4">
                                         <span className="font-bold text-red-500">Note</span> :

@@ -15,9 +15,9 @@ const Navbar = () => {
     return (
         <header>
             <nav className=' '>
-                <div className='relative flex justify-between items-center p-2 border border-black '>
+                <div className='relative flex justify-between items-center py-2 px-3 border border-black '>
                     <div className='logo-container'>
-                        <div className='flip-inner w-40 h-14 sm:w-52 sm:h-14 md:w-64 md:h-20'>
+                        <div className='flip-inner w-32 h-9 sm:w-52 sm:h-14 md:w-64 md:h-20'>
                             <div className='w-full flex justify-center front'> {/*Div is for logo*/}
                                 <Image src={logo} alt='construct Ease' className='rounded-lg w-full' />
                             </div>

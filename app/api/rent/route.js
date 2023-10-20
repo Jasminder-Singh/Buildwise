@@ -26,11 +26,11 @@ export async function POST(req) {
         else {
 
             const result = filteredTools.map((obj) => {
-                return toolModel.updateOne({ punjabiName: obj.punjabi , quantity : {$gt : 0}},{$inc : {quantity : -obj.quantity}});
+                return toolModel.updateOne({ $and : [ { punjabiName: obj.punjabi } , { quantity : {$gt : 0} } ] },{$inc : {quantity : -obj.quantity}});
             })
             
             Promise.all(result)
-            .then((ans)=>{console.log(ans)})
+            .then((ans)=>{})
             .catch(
                 (err)=>{
                     console.log(err)

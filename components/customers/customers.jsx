@@ -95,15 +95,15 @@ const Coustmers = () => {
             <div>
                 <div className='flex flex-col md:flex-row justify-evenly items-center border-2 border-black p-4'>
                     <h1 className='text-2xl font-bold text-center p-3 tracking-wider' >Customers</h1>
-                    <div className='flex justify-between md:justify-evenly w-full'>
-                        <div className='flex justify-between items-centerrounded-lg bg-gray-300 rounded-lg'>
+                    <div className='flex flex-col sm:flex-row justify-between md:justify-evenly w-full'>
+                        <div className='flex justify-between items-centerrounded-lg bg-gray-300 rounded-lg my-2'>
                             <input type="search" placeholder='Search... '
-                                className='border border-black px-1 md:px-3 py-1 rounded-lg w-full'
+                                className='border border-black px-2 py-2 md:px-3 md:py-2 rounded-lg w-full'
                                 onChange={(e) => setSearch(e.target.value)} />
                             <BsSearch className='text-2xl self-center mx-3 cursor-pointer' />
                         </div>
                         <div>
-                            <select onChange={(e)=>findByStatus(e.target.value)} className='border border-black p-1 text-md rounded-lg text-center w-full'>
+                            <select onChange={(e)=>findByStatus(e.target.value)} className='border border-black p-1 md:p-2 text-md rounded-lg text-center w-full my-2'>
                                 <option>Select By</option>
                                 <option value={"all"} className='font-bold'>
                                     All
