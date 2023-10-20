@@ -199,13 +199,13 @@ const CustomerId = ({ id }) => {
 
     return (
         <>
-            <div className=" flex justify-center items-center h-full">{/* Main container */}
+            <div className=" flex justify-center items-center h-full p-2">{/* Main container */}
                 {loading && <Loading />}
                 {model && <Model action={setModel} updateToolStatus={updateToolStatus} />}
                 {
                     user ?
-                        <div className="border-2 border-blue-500 h-full w-full md:w-[70%] py-5 px-3">
-                            <Link href={"/customers"} className=" underline text-blue-500 my-1 inline-block" >{"< Go back"}</Link>
+                        <div className="border border-blue-500 rounded-xl h-full w-full md:w-[70%] py-5 px-3">
+                            <Link href={"/customers"} className=" underline text-blue-500 my-1 inline-block border p-1" ><span> Go back</span></Link>
                             <div className="border border-black flex flex-row-reverse sm:flex-row justify-between items-center px-2 py-5">
                                 <div className="flex flex-col justify-between px-4 py-2 w-[50%] sm:w-[30%] h-full mb-3">
                                     <Image src={user?.image || face} alt='face' width={100} height={100} className="border border-black rounded-lg mb-2 self-center" />
