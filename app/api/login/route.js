@@ -7,8 +7,10 @@ export async function POST(req) {
     try {
     
         const { email, password } = await req.json();    
+        console.log("Email ",email,password);
         await dbConnect();
         const isAuthorizedUser = await userModel.findOne({ email: email });
+        console.log(isAuthorizedUser);
         if (isAuthorizedUser) {
             const isMatch = await bcrypt.compare(password, isAuthorizedUser.password);
             if (isMatch) {

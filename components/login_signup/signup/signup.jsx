@@ -66,6 +66,7 @@ const Signup = () => {
 				}
 
 			} catch (err) {
+				setSpiner(false);
 				toast.error('Failed ! try later.', {
 					position: "top-center",
 					autoClose: 3000,

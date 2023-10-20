@@ -10,8 +10,9 @@ export const authOptions = {
             credentials: {},
             async authorize(credentials) {
                 try {
-
+                    
                     const { email, password } = credentials;
+                    
                     const response = await fetch("https://buildwise-three.vercel.app/api/login", {
                         method: "POST",
                         headers: {
@@ -20,15 +21,13 @@ export const authOptions = {
                         body: JSON.stringify({ email, password })
                     })
                     const finalResult = await response.json();
-                    if (finalResult?.user) {
-                        const user = {
-                            name: finalResult.user.name,
-                            email: finalResult.user.email,
-                            gender: finalResult.user.gender
-                        }
+                    console.log(finalResult);
+                    if(finalResult.user){
+
+                        const {user} = finalResult;
+                        console.log(user);
                         return user;
-                    }
-                    return null;
+                    }else return null;
 
                 } catch (err) {
                     console.log(err);
@@ -51,7 +50,6 @@ export const authOptions = {
         async signIn({ profile, account }) {
             try {
                 
-                const { name, picture, email, email_verified } = profile;
                 if (account.provider === "google" || account.provider === "facebook") {
 
                     const response = await fetch('https://buildwise-three.vercel.app/api/signup',{
@@ -62,6 +60,9 @@ export const authOptions = {
                         body : JSON.stringify(profile)
 
                     });
+                    return true;
+                } else if(account.provider === "credentials") {
+                    
                     return true;
                 }
                 return false;
