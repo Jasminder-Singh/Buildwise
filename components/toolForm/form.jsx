@@ -324,7 +324,8 @@ const ToolForm = () => {
     async function fetchTools() {
         try {
             const date = new Date();
-            const data = await fetch(`https://buildwise-three.vercel.app/api/gettools?date=${date}`, {
+            const formattedDate = currentDate.toISOString();
+            const data = await fetch(`https://buildwise-three.vercel.app/api/gettools?date=${encodeURIComponent(formattedDate)}`, {
                 method: "GET",
                 cache : "no-store"
             });
@@ -355,11 +356,10 @@ const ToolForm = () => {
                     rent: getTools?.find((obj2) => obj2.punjabiName === obj.punjabi).price
                 }
             })
-            console.log("Update get tools");
+            
             setTools(updatedTools);
         }
     }, [getTools])
-    console.log(tools);
     return (
 
         <div className="border">{/* Main container START*/}
