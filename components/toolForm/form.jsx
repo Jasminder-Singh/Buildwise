@@ -362,6 +362,7 @@ const ToolForm = () => {
             setTools(updatedTools);
         }
     }, [getTools])
+    console.log(tools);
     return (
 
         <div className="border">{/* Main container START*/}
