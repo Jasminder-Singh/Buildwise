@@ -332,7 +332,6 @@ const ToolForm = () => {
             });
 
             const result = await data.json();
-            console.log(result);
             setGetTools(result.tools);
 
 

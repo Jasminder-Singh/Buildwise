@@ -8,8 +8,6 @@ import { BsPhoneFill } from 'react-icons/bs';
 import { GiModernCity } from 'react-icons/gi';
 import { BsSearch } from 'react-icons/bs';
 
-
-
 const Coustmers = () => {
 
     const [users, setUsers] = useState("");
@@ -30,7 +28,7 @@ const Coustmers = () => {
             });
             
             const result = await customers.json();
-            // result.data ;
+           
             if (result.data) {
                 const updateCustomers = result.data.map((customer) => {
                     const newDate = new Date(customer.date).toLocaleString();
