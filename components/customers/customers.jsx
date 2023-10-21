@@ -28,7 +28,7 @@ const Coustmers = () => {
                     "Content-type": "application/json"
                 }
             });
-            setLoading(false);
+            
             const result = await customers.json();
             // result.data ;
             if (result.data) {
@@ -37,6 +37,7 @@ const Coustmers = () => {
                     return { ...customer, currDate: newDate };
                 });
                 setUsers(updateCustomers);
+                setLoading(false);
             }
 
         } catch (err) {
@@ -205,14 +206,14 @@ const Coustmers = () => {
 
                     (searchedUsers?.length == 0 && searchCustomer)
                         ? <div className='flex flex-col justify-evenly items-center h-52 w-full'>
-                            <p className='text-4xl font bold text-slate-300'>Not Found any Customer.</p>
+                            <p className='text-4xl font bold text-slate-300 text-center'>Not Found any Customer.</p>
                         </div>
                         : null
                 }
             </div>
             {
-                users?.length ? null : <div className='flex flex-col justify-evenly items-center h-52 place-self-auto'>
-                    <p className='text-4xl font bold text-slate-300'>Not Found any Customer Refresh the page.</p>
+                users?.length || loading ? null : <div className='flex flex-col justify-evenly items-center h-52 place-self-auto'>
+                    <p className='text-4xl font bold text-slate-300 text-center'>Not Found any Customer Refresh the page.</p>
                     <button onClick={fetchCustomers} className='cursor-pointer border bg-blue-500 px-5 py-2 text-white text-lg'>
                         Refresh
                     </button>

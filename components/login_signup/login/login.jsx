@@ -5,20 +5,17 @@ import { GoPerson } from 'react-icons/go';
 import { toast } from 'react-toastify';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useRouter } from 'next/navigation';
 import { signIn } from 'next-auth/react';
 import { useSession } from 'next-auth/react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 
 const Login = () => {
 
-	const router = useRouter();
 	const session = useSession();
-	const [flag, setFlag] = useState(false); // Check if user clicks on login button or not;
 	const [spiner, setSpiner] = useState(false);
-	if(session?.status === "authenticated") redirect("/customers");
+	if (session?.status === "authenticated") redirect("/customers");
 
 	const { values, touched, errors, handleSubmit, handleChange, handleBlur } = useFormik({
 		initialValues: {
@@ -37,9 +34,9 @@ const Login = () => {
 					password: values.password,
 					redirect: false
 				});
-				setFlag(true); // It sets to true to identifying user clicks on login button.
+				
 				setSpiner(false); // Spiner stops.
-				if(response.error){
+				if (response.error) {
 					toast.error('Email or password are invalid.', {
 						position: "top-center",
 						autoClose: 3000,
@@ -97,13 +94,15 @@ const Login = () => {
 							onChange={handleChange} onBlur={handleBlur} />
 					</div>
 					<div className='flex justify-center items-center p-5 '>
-						<button type='submit' className='flex justify-around items-center border-2 px-5 py-2 w-40 bg-[#1060D2] text-white text-lg tracking-wider rounded-lg hover:border-[#1060D2]'>
-							{
-								spiner
-									? <span className="animate-spin border-t-4 rounded-full w-8 h-8 block hover:border-[#1060D2]"></span>
-									: <span>Login</span>
-							}
-						</button>
+
+						{
+							spiner
+								? <span className="animate-spin border-t-4 rounded-full w-8 h-8 block border-[#1060D2]"></span>
+								: <button type='submit' className='flex justify-around items-center border-2 px-5 py-2 w-40 bg-[#1060D2] text-white text-lg tracking-wider rounded-lg hover:border-[#1060D2]'>
+									<span>Login</span>
+								</button>
+						}
+
 					</div>
 				</div>
 				<div>
@@ -113,7 +112,7 @@ const Login = () => {
 						<Link href={"/signup"} className='text-blue-500 underline ' > signup.</Link>
 					</p>
 				</div>
-				
+
 			</div>
 		</form>
 	)

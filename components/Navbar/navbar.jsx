@@ -6,6 +6,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { MdAddCircle } from 'react-icons/md';
 import { signIn, signOut, useSession } from 'next-auth/react';
+import { RxCross1 } from 'react-icons/rx';
 import './navbar.css';
 
 const Navbar = () => {
@@ -25,14 +26,14 @@ const Navbar = () => {
                     </div>
 
                     <div className='w-[60%] md:border-2 border-dashed border-[#1060D2] py-2 rounded-lg flex justify-end'>
-                        <ul className={`absolute top-[102%] w-full md:relative bg-white text-center z-10
+                        <ul className={`absolute top-[100%] w-full sm:w-[70%] md:w-full md:relative bg-white text-center z-10 border-2 border-sky-400 md:border-0
                         ${!flag ? 'hidden' : null} md:flex justify-evenly items-center text-xl font-serif`}>
 
                             {
                                 session.status === "unauthenticated" || session.status === "loading" ?
-                                    <li className='tracking-wider cursor-pointer hover:bg-[#1060D2] hover:text-white p-2 md:rounded-lg border-b border-b-black md:border md:border-white'>
+                                    <li className='tracking-wider cursor-pointer hover:bg-[#1060D2] hover:text-white p-2 md:rounded-lg border-b  border-b-slate-200 md:border md:border-white'>
                                         <Link href={"/"} >Home</Link></li>
-                                    : <li className='tracking-wider cursor-pointer hover:bg-[#1060D2] hover:text-white p-2 md:rounded-lg border-b border-b-black md:border md:border-white'>
+                                    : <li className='tracking-wider cursor-pointer hover:bg-[#1060D2] hover:text-white p-2 md:rounded-lg border-b border-b-slate-200 md:border md:border-white'>
                                         <Link href={"/customers"} >Customers</Link></li>
                             }
                             {
@@ -52,7 +53,7 @@ const Navbar = () => {
                                         Logout</li>
                             }
                         </ul>
-                        <span className='block md:hidden w-8 text-3xl p-2' onClick={() => setFlag(prev => !prev)}><AiOutlineMenu /></span>
+                        <span className='block md:hidden w-8 text-3xl p-2' onClick={() => setFlag(prev => !prev)}>{flag ? <RxCross1 /> : <AiOutlineMenu />}</span>
 
                     </div>
 

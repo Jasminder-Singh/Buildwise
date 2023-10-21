@@ -37,7 +37,7 @@ const Signup = () => {
 					},
 					body: JSON.stringify(values)
 				});
-				
+
 				setSpiner(false);
 				if (response.status === 201) {
 					resetForm({ values: '' });
@@ -147,18 +147,20 @@ const Signup = () => {
 						</div>
 					</div>
 					<div className='flex justify-center items-center p-5'>
-						<button type='submit'
-							className='flex justify-around items-center border-2 px-3 py-2 w-40 
-					bg-[#1060D2] text-white text-lg tracking-wider rounded-lg hover:border-[#1060D2]'>
-							
-							{spiner ?
-								<span className="animate-spin border-t-2 rounded-full w-6 h-6 block hover:border-[#1060D2]">
 
-								</span>
 
-								: <span>Create</span>
-							}
-						</button>
+						{spiner ?
+							<span className="animate-spin border-t-4 rounded-full w-8 h-8 block border-[#1060D2]">
+
+							</span>
+
+							: <button type='submit'
+								className='flex justify-around items-center border-2 px-3 py-2 w-40 bg-[#1060D2] text-white text-lg
+								 tracking-wider rounded-lg hover:border-[#1060D2]'>
+								<span>Create</span>
+							</button>
+						}
+
 
 					</div>
 				</div>
