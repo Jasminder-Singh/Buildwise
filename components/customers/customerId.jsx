@@ -81,17 +81,15 @@ const CustomerId = ({ id }) => {
         try {
             setLoading(true);
             const response = await fetch(`https://buildwise-three.vercel.app/getcustomers/${id}`, {
-                method: "GET",
-                headers: {
-                    "Content-type": "application/json"
-                }
+                method: "GET"
             });
             setLoading(false);
             const result = await response.json();
-
+            console.log(result);
             setUser(result.user);
 
         } catch (err) {
+            console.log(err);
             toast.error('Server error.', {
                 position: "top-right",
                 autoClose: 3000,
