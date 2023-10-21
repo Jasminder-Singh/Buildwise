@@ -326,10 +326,7 @@ const ToolForm = () => {
             const date = new Date();
             const data = await fetch(`https://buildwise-three.vercel.app/api/maintools?date=${date.toISOString()}`, {
                 method: "GET",
-                cache : "no-store",
-                headers : {
-                    "Cache-Control": "public, max-age=0, must-revalidate"
-                }
+                cache : "no-cache"
             });
 
             const result = await data.json();
