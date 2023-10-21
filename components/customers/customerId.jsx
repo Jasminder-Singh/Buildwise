@@ -172,6 +172,7 @@ const CustomerId = ({ id }) => {
     // Function for updating each tools status and quantity.
     const CancelOrReturn = async () => {
         try {
+            setUpdateTools(false);
             const response = await fetch(`https://buildwise-three.vercel.app/api/getcustomers/${user._id}`, {
                 method: "PUT",
                 headers: {
@@ -179,7 +180,6 @@ const CustomerId = ({ id }) => {
                 },
                 body: JSON.stringify({ tools: user.rentedTools, newAmount: user.amount })
             })
-            setUpdateTools(false);
         } catch (err) {
             console.log(err);
         }
@@ -193,6 +193,7 @@ const CustomerId = ({ id }) => {
     useEffect(() => {
         if (updateTools) {
             CancelOrReturn();
+
         }
         
     }, [updateTools]);
