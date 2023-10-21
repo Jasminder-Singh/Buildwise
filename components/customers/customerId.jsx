@@ -173,7 +173,8 @@ const CustomerId = ({ id }) => {
     const CancelOrReturn = async () => {
         try {
             setUpdateTools(false);
-            const response = await fetch(`https://buildwise-three.vercel.app/api/getcustomers/${user._id}`, {
+            const date = new Date();
+            const response = await fetch(`https://buildwise-three.vercel.app/api/getcustomers/${user._id}?date=${date}`, {
                 method: "PUT",
                 headers: {
                     "Content-type": "application/json",
