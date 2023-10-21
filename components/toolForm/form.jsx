@@ -327,7 +327,7 @@ const ToolForm = () => {
                 method: "GET",
                 cache : "no-store",
                 headers : {
-                    "Cache-Control": "no-cache, no-store, max-age=0, must-revalidate"
+                    "Cache-Control": "public, max-age=0, must-revalidate"
                 }
             });
 
