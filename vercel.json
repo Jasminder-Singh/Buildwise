@@ -5,9 +5,15 @@
             "headers": [
                 {
                     "key": "Cache-Control",
-                    "value": "no-store"
+                    "value": "public, max-age=0, must-revalidate"
                 }
             ]
         }
-    ]
+    ],
+    "functions": {
+        "api/test.js": {
+          "memory": 3008,
+          "maxDuration": 30
+        }
+      }
 }

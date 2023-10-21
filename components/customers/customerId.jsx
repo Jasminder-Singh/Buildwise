@@ -111,7 +111,6 @@ const CustomerId = ({ id }) => {
                 method: "PUT",
                 headers: {
                     "Content-type": "application/json"
-
                 },
                 body: JSON.stringify({ user: user, userStatus })
             });
@@ -191,9 +190,9 @@ const CustomerId = ({ id }) => {
     }, [user]);
 
     useEffect(() => {
+
         if (updateTools) {
             CancelOrReturn();
-
         }
         
     }, [updateTools]);
