@@ -354,8 +354,8 @@ const ToolForm = () => {
         if (getTools) {
             const updatedTools = tools?.map((obj) => {
                 return {
-                    ...obj, availQuantity: getTools?.find((obj2) => obj2.punjabiName === obj.punjabi)?.quantity,
-                    rent: getTools?.find((obj2) => obj2.punjabiName === obj.punjabi)?.price
+                    ...obj, availQuantity: getTools?.find((obj2) => obj2.punjabiName === obj.punjabi).quantity,
+                    rent: getTools?.find((obj2) => obj2.punjabiName === obj.punjabi).price
                 }
             })
             console.log("Update get tools");
