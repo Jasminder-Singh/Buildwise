@@ -10,7 +10,5 @@ export async function GET(){
         return NextResponse.json({message : "failed"},{status : 404});
     } catch(err){
         return NextResponse.json({message : "error"},{status : 500});
-    }finally{
-        await disconnectDB();
     }
 }
