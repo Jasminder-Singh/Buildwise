@@ -327,7 +327,8 @@ const ToolForm = () => {
                 method: "GET",
                 cache : "no-store",
                 headers : {
-                    "Content-type" : "application/json"
+                    "Content-type" : "application/json",
+                    "Cache-Control": "no-cache"
                 }
             });
             const result = await data.json();
@@ -357,10 +358,10 @@ const ToolForm = () => {
                     rent: getTools?.find((obj2) => obj2.punjabiName === obj.punjabi)?.price
                 }
             })
+            console.log("Update get tools");
             setTools(updatedTools);
         }
     }, [getTools])
-console.log("called");
     return (
 
         <div className="border">{/* Main container START*/}
