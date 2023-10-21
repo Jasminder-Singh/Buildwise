@@ -80,7 +80,7 @@ const CustomerId = ({ id }) => {
     const fetchCustomerById = async () => {
         try {
             setLoading(true);
-            const response = await fetch(`https://buildwise-three.vercel.app/getcustomers/${id}`, {
+            const response = await fetch(`https://buildwise-three.vercel.app/api/getcustomers/${id}`, {
                 method: "GET"
             });
             setLoading(false);
