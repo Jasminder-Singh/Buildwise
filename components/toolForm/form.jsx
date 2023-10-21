@@ -323,11 +323,14 @@ const ToolForm = () => {
     // Fetching the tools from database;
     async function fetchTools() {
         try {
-            
             const data = await fetch(`https://buildwise-three.vercel.app/api/gettools`, {
                 method: "GET",
-                cache : "no-store"
+                cache : "no-store",
+                headers : {
+                    "Cache-Control": "no-cache, no-store, max-age=0, must-revalidate"
+                }
             });
+
             const result = await data.json();
             console.log(result);
             setGetTools(result.tools);

@@ -7,12 +7,11 @@ import { BsFacebook } from 'react-icons/bs';
 // import { FaTwitter } from 'react-icons/fa';
 import Link from 'next/link';
 import { signIn, useSession } from 'next-auth/react';
-import { useEffect, useState } from 'react';
+import {useState } from 'react';
 import Loading from "../loading/loading";
 
 const LScontainer = () => {
 	const session = useSession();
-	const [flag, setFlag] = useState(false);
 	const [loading, setLoading] = useState(false);
 	const handleLoading = (provider) => {
 		signIn(provider, { callbackUrl: "/customers" });
