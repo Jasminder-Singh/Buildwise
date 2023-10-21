@@ -13,6 +13,7 @@ import Model from "../customerIdEditModel/model";
 import { ImCancelCircle } from 'react-icons/im';
 import { MdOutlineDownloadDone } from 'react-icons/md';
 
+
 const CustomerId = ({ id }) => {
     const router = useRouter();
     const [user, setUser] = useState("");
@@ -173,8 +174,8 @@ const CustomerId = ({ id }) => {
     const CancelOrReturn = async () => {
         try {
             setUpdateTools(false);
-            const date = new Date();
-            const response = await fetch(`https://buildwise-three.vercel.app/api/getcustomers/${user._id}?date=${date}`, {
+            
+            const response = await fetch(`https://buildwise-three.vercel.app/api/getcustomers/${user._id}`, {
                 method: "PUT",
                 headers: {
                     "Content-type": "application/json",
