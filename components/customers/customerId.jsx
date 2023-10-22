@@ -123,7 +123,7 @@ const CustomerId = ({ id }) => {
                     if (!tool.date || tool.status === "active") {
                         const newDate = new Date();
                         return { ...tool, status: value, date: newDate.toLocaleDateString() };
-                    }
+                    } 
                     return { ...tool, status: value };
                 });
 

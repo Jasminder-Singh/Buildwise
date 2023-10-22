@@ -34,11 +34,11 @@ export async function PUT(req) { // This is used when customer pay the amount or
         
         // mark status cancel or return to each tool.
         const markStatus = user.rentedTools.map((tool)=>{
-            if(userStatus === "cancel"){
+            if(userStatus === "cancel" && tool.status !== "return"){
                 const newDate = new Date();
                 return {...tool, status : "cancel", date : newDate.toLocaleDateString()};
             }
-            if(userStatus === "completed"){
+            if(userStatus === "completed" && tool.status !== "cancel"){
                 const newDate = new Date();
                 return {...tool, status : "return", date : newDate.toLocaleDateString()};
             }
