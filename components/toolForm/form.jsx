@@ -30,11 +30,10 @@ import { toast } from "react-toastify";
 import { useRouter } from 'next/navigation';
 import Loading from "../loading/loading";
 
-const ToolForm = () => {
+const ToolForm = ({getTools}) => {
     const [identity, setIdentity] = useState(''); // This is working as only for placeholder.
     const [flag, setFlag] = useState(false); // For disabling the submit button. If any of tool select then it will true;
     const [image, setImage] = useState('');
-    const [getTools, setGetTools] = useState(""); // Tools are fetched by api with fetchTools function();
     const [loading, setLoading] = useState(false); // Show loading model.
 
     const router = useRouter();
@@ -320,23 +319,6 @@ const ToolForm = () => {
         }
     };
 
-    // Fetching the tools from database;
-    async function fetchTools() {
-        try {
-            const date = new Date();
-            const data = await fetch(`https://buildwise-three.vercel.app/api/maintools?date=${date.toISOString()}`, {
-                method: "GET",
-                cache : "no-cache"
-            });
-
-            const result = await data.json();
-            setGetTools(result.tools);
-
-
-        } catch (err) {
-            console.log(err);
-        }
-    }
     // Function for reseting all the selected tools and image.
     function resetTools() {
         const removeTools = tools.map((obj) => {
@@ -347,8 +329,8 @@ const ToolForm = () => {
 
     }
     useEffect(() => {
-        !getTools ? fetchTools() : null;
         if (getTools) {
+    
             const updatedTools = tools?.map((obj) => {
                 return {
                     ...obj, availQuantity: getTools?.find((obj2) => obj2.punjabiName === obj.punjabi).quantity,
@@ -358,7 +340,7 @@ const ToolForm = () => {
             
             setTools(updatedTools);
         }
-    }, [getTools])
+    }, [getTools]);
     return (
 
         <div className="border">{/* Main container START*/}
