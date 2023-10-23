@@ -5,6 +5,7 @@ import dbConnect from "@/db/dbcon";
 export async function GET(req,res){
     try {
         await dbConnect();
+        console.log(req.nextUrl.searchParams.get(""));
         const currDate = new Date();
         const customers = await customerModel.find({status : "active"});
         
