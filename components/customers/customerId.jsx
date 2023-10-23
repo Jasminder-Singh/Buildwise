@@ -57,19 +57,20 @@ const CustomerId = ({ id }) => {
                 }
                 return tool;
             })
-            setUser({ ...user, rentedTools: updateUserRentToolsStatus, amount: user.amount - (cancleTool.rent * cancleTool.quantity) });
+            setUser({ ...user, rentedTools: updateUserRentToolsStatus, amount: user.amount - (cancleTool.rent * cancleTool.quantity * user.rentDays) });
             setUpdateTools(true);
         }
         else if (answer === "return") {
-
+            let canceltool;
             const updateUserRentToolsStatus = user.rentedTools.map((tool) => {
                 if (tool.checked && tool.status !== "cancel") {
+                    canceltool = tool;
                     let newDate = new Date();
                     return { ...tool, status: "return", date: newDate.toLocaleDateString() }; // update status active to return and add date.
                 }
                 return tool;
             })
-            setUser({ ...user, rentedTools: updateUserRentToolsStatus });
+            setUser({ ...user, rentedTools: updateUserRentToolsStatus, amount: user.amount - (canceltool.rent * canceltool.quantity * user.rentDays) });
             setUpdateTools(true);
         } else {
             alert("This will not cancel, because you rented this tool for ", user.rentDays, " days.")

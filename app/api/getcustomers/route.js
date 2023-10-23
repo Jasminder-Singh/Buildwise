@@ -16,7 +16,7 @@ export async function GET() {
         await disconnectDB();
     }
 }
-export async function PUT(req) { // This is used when customer pay the amount or cancel.
+export async function PUT(req) { // This is used when customer pay the amount or cancel. Submit response fundtion();
     try {
         const { user, userStatus } = await req.json();
         // user = {key : values};
