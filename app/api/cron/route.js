@@ -12,10 +12,13 @@ export async function GET(req,res){
         
         const updateRentDays = customers.map((customer)=>{
             let totalAmount = 0;
+
             if(customer.date.getDate() !== currDate.getDate() || customer.date.getMonth() !== currDate.getMonth() || customer.date.getFullYear() !== currDate.getFullYear()){
-                console.log("Yeah cron job ran.");
+             
                 customer.rentedTools.forEach((tool)=>{
+
                     if(tool.status === "active"){
+                    
                         totalAmount += tool.rent * tool.quantity * customer.rentDays + 1;
                     }
                 })
@@ -28,9 +31,9 @@ export async function GET(req,res){
         })
 
         Promise.all(updateRentDays)
-        .then((result)=>{console.log(result)})
+        .then((result)=>{})
         .catch((err)=>{
-            console.log(err);
+            
             return NextResponse.json({message : "Promise failed"}, {status : 500});
         })        
         return NextResponse.json({message : "success"}, {status : 200});
