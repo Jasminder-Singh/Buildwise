@@ -20,7 +20,7 @@ const Coustmers = () => {
     const fetchCustomers = async () => {
         try {
             setLoading(true);
-            const customers = await fetch('https://buildwise-three.vercel.app/api/getcustomers', {
+            const customers = await fetch('http://localhost:3000/api/getcustomers', {
                 method: "GET",
                 headers: {
                     "Content-type": "application/json"
@@ -36,9 +36,10 @@ const Coustmers = () => {
                 });
                 updateCustomers.sort((a,b)=>{
                     if(a.status === "active") return -1;
-                    if(b.status === "completed") return -1;
+                    if(b.status === "cancel") return -1;
                     return 0;
-                })
+                });
+                console.log(updateCustomers);
                 setUsers(updateCustomers);
                 setLoading(false);
             }
