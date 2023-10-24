@@ -32,8 +32,13 @@ const Coustmers = () => {
             if (result.data) {
                 const updateCustomers = result.data.map((customer) => {
                     const newDate = new Date(customer.date).toLocaleString();
-                    return { ...customer, currDate: newDate };
+                    return { ...customer, currDate: newDate }; // Adding date property in customer array of object for each.
                 });
+                updateCustomers.sort((a,b)=>{
+                    if(a.status === "active") return -1;
+                    if(b.status === "completed") return -1;
+                    return 0;
+                })
                 setUsers(updateCustomers);
                 setLoading(false);
             }

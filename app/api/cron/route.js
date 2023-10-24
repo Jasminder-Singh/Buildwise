@@ -19,7 +19,7 @@ export async function GET(req,res){
 
                     if(tool.status === "active"){
                     
-                        totalAmount += tool.rent * tool.quantity * customer.rentDays + 1;
+                        totalAmount += (tool.rent * tool.quantity * (customer.rentDays+1) );
                     }
                 })
                 
