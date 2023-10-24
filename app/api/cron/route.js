@@ -13,7 +13,7 @@ export async function GET(req,res){
         const updateRentDays = customers.map((customer)=>{
             let totalAmount = 0;
 
-            if(customer.date.getDate() !== currDate.getDate() || customer.date.getMonth() !== currDate.getMonth() || customer.date.getFullYear() !== currDate.getFullYear()){
+            if(customer.updatedAt.getDate() !== currDate.getDate() || customer.updatedAt.getMonth() !== currDate.getMonth() || customer.updatedAt.getFullYear() !== currDate.getFullYear()){
              
                 customer.rentedTools.forEach((tool)=>{
 
@@ -25,7 +25,7 @@ export async function GET(req,res){
                 
                 return customerModel.findByIdAndUpdate({_id:customer._id},{$set : {amount : totalAmount}, $inc : {rentDays : 1}}, {new : true});
 
-            }
+            }else console.log("Date Not match.")
             return null;
            
         })

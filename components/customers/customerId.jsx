@@ -301,7 +301,7 @@ const CustomerId = ({ id }) => {
                                                         <td className="p-3 sm:text-lg font-sans">{tool.quantity}</td>
                                                         <td className="p-3 sm:text-lg font-sans">{tool.rent}₹</td>
                                                         <td className="p-3 sm:text-lg font-sans">{tool.status === "cancel" || tool.status === "return" ? "--" : user?.rentDays}</td>
-                                                        <td className="p-3 sm:text-lg font-sans">{tool.rent * tool.quantity * user?.rentDays}₹</td>
+                                                        <td className={`p-3 sm:text-lg font-sans ${tool.status === "cancel" ? "line-through" : null}`}>{tool.rent * tool.quantity * user?.rentDays}₹</td>
                                                     </tr>
 
                                                 })
