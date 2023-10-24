@@ -43,3 +43,10 @@ export async function GET(req,res){
         return NextResponse.json({message : "failed"}, {status : 500});
     }
 }
+export async function PUT(req,res){
+    try {
+        return NextResponse.json({message : "Run"}, {status : 200});
+    } catch (err) {
+        return NextResponse.json({message : "faile put"}, {status : 500});
+    }
+}
