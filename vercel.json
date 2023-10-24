@@ -1,8 +1,14 @@
 {
     "crons": [
-      {
-        "path": "/api/cron",
-        "schedule": "0 0 * * *"
-      }
+        {
+            "path": "/api/cron",
+            "schedule": "0 0 * * *"
+        }
+    ],
+    "routes": [
+        {
+            "src": "/api/cron/(.*)",
+            "dest": "/api/cron/route.js"
+        }
     ]
-  }
+}
