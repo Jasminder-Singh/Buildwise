@@ -73,7 +73,7 @@ const CustomerId = ({ id }) => {
             setUser({ ...user, rentedTools: updateUserRentToolsStatus, amount: user.amount - (canceltool.rent * canceltool.quantity * user.rentDays) });
             setUpdateTools(true);
         } else {
-            alert("This will not cancel, because you rented this tool for ", user.rentDays, " days.")
+            alert("Can't be to cancel after 1 day.");
         }
         setModel(false);
 
